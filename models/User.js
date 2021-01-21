@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+// TODO: Add regex matching to email, username, password
 const User = new Schema({
     username: {
         type: String,
