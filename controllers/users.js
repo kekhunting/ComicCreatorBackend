@@ -43,7 +43,7 @@ const login = async (req, res) => {
     let password = req.body.password;
 
     if(username.includes('@')) {
-        User.findOne({ email: username }, (foundUser, err) =>{
+        await User.findOne({ email: username }, (foundUser, err) =>{
             if (err) return res.status(500).send({ error: err, message: 'Server error unable to login, please try agian' });
             if (!foundUser) return res.status(404).send({ error: err, message: 'User not registered, please sign up' });
 
@@ -60,7 +60,7 @@ const login = async (req, res) => {
         })
     }
 
-    User.findOne({ username: username }, (foundUser, err) =>{
+    awaitUser.findOne({ username: username }, (foundUser, err) =>{
         if (err) return res.status(500).send({ error: err, message: 'Server error unable to login, please try agian' });
         if (!foundUser) return res.status(404).send({ error: err, message: 'User not registered, please sign up' });
 
@@ -77,7 +77,7 @@ const login = async (req, res) => {
     })
 }
 
-export default {
+module.exports = {
     signup,
     login
 }
