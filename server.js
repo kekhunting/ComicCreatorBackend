@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 require('dotenv').config();
@@ -14,6 +15,23 @@ server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
 server.use('/users', userRoutes);
+
+// DB CONNECT
+const db = process.env.DB;
+try {
+    mongoose.connect(
+        db, 
+        { 
+            useNewUrlParser:true,
+            useCreateIndex: true,
+            useUnifiedTopology: true
+        }
+    )
+    .then(() => console.log('Connected To DB'))
+    .catch(err => console.log(err));  
+} catch(err) {
+    console.log(err);
+}
 
 
 // PORT
